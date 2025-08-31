@@ -1,6 +1,7 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../pageObject/login.po.js';
 import { ContactPage } from '../pageObject/contact.po.js';
+import { access } from 'fs';
 const testData = require('../testData/contact.json');
 const contactTestData = require('../../fixtures/contactFixtures.json');
 const { authenticateUser, getApiUrlBase, createEntity } = require('../tests/helper.spec.js');
@@ -48,19 +49,21 @@ test.beforeEach(async ({ page }) => {
 test.describe('Contact testcases', () => {
     test('Contact Add test', async ({ page, request }) => {
         const contact = new ContactPage(page);
-        
-        // Add contact via UI
         await contact.contactAdd(
             contactTestData.firstName,
             contactTestData.lastName,
-            contactTestData.email,
+      hj      contactTestData.email,
             contactTestData.phone,
             contactTestData.dob,
             contactTestData.address,
             contactTestData.city,
             contactTestData.country,
             contactTestData.state
-        );
+            cessToken = await authenticateUser(testData.validUser.email, testData.validUser.password, { request }
+            const id = await getEntity(accessToken, '/contacts', '200', { request }
+            await deleteEntity(accessToken, `/contacts/${id}`, '204', { request }
+            await validateEntity(accessToken, `/contacts/${id}`, '404', { request }
+        })
         
         await contact.viewContact();
         await contact.validateContactCreated(
@@ -114,3 +117,4 @@ test.describe('Contact testcases', () => {
         await validateEntity(accessToken, `/contacts/${id}`, '404', { request });
     });
 });
+j
